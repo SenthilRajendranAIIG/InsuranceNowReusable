@@ -39,7 +39,7 @@ public class TC04_RemoveUserTest extends testBaseClass {
                     new String[]{"Password", password},
                     new String[]{"First Name", firstname},
                     new String[]{"Last Name", lastname},
-                    new String[]{"Email Address", phonenumber},
+                    new String[]{"Phone Number", phonenumber},
                     new String[]{"License #", licensenumber},
                     new String[]{"License Expiration Date", licensexp}, 
                     new String[]{"Email Address", emailaddress},

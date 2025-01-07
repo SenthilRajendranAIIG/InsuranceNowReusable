@@ -28,7 +28,17 @@ public class TC05_ResetPassword extends testBaseClass {
 
         try {
             // Step 1: Validate input data
-            validateInputData(username, password, firstname, lastname, emailaddress, usercode, newpassword);
+            validateInputData(
+            		new String [] {"Username", username},
+            		new String [] {"Password", password},
+            		new String [] {"First Name", firstname },
+            		new String [] {"Last Name", lastname },
+            		new String [] {"Email Address", emailaddress }, 
+            		new String [] {"User Code", usercode }, 
+            		new String [] {"New Passowrd", newpassword }
+            		//username, password, firstname, lastname, emailaddress, usercode, newpassword
+            		
+            		);
 
             // Step 2: Initialize page objects
             InHomePage homePage = new InHomePage(getDriver());
@@ -55,19 +65,30 @@ public class TC05_ResetPassword extends testBaseClass {
         }
     }
 
-    private void validateInputData(String username, String password, String firstname, String lastname, 
-                                   String emailaddress, String usercode, String newpassword) {
-        if (username == null || username.trim().isEmpty() ||
-            password == null || password.trim().isEmpty() ||
-            firstname == null || firstname.trim().isEmpty() ||
-            lastname == null || lastname.trim().isEmpty() ||
-            emailaddress == null || emailaddress.trim().isEmpty() ||
-            usercode == null || usercode.trim().isEmpty() ||
-            newpassword == null || newpassword.trim().isEmpty()) {
-            String message = "Invalid input data: One or more required fields are missing.";
-            logger.error(message);
-            Assert.fail(message);
-        }
+    private void validateInputData(String[]... fields) {
+    	
+    	for (String[] field : fields) {
+    		String fieldName = field[0];
+    		String fieldValue = field[1];
+    		
+    		if (fieldValue == null || fieldValue.trim().isEmpty()) {    			
+	            String message = "Invalid input data: Missing required field '" + fieldName + "'.";
+	            logger.error(message);
+	            Assert.fail(message);
+    		}
+    		
+    	}
+//	        if (username == null || username.trim().isEmpty() ||
+//	            password == null || password.trim().isEmpty() ||
+//	            firstname == null || firstname.trim().isEmpty() ||
+//	            lastname == null || lastname.trim().isEmpty() ||
+//	            emailaddress == null || emailaddress.trim().isEmpty() ||
+//	            usercode == null || usercode.trim().isEmpty() ||
+//	            newpassword == null || newpassword.trim().isEmpty()) {
+//	            String message = "Invalid input data: One or more required fields are missing.";
+//	            logger.error(message);
+//	            Assert.fail(message);
+//	        }
     }
 
     private void loginAndNavigateToUserManagementPage(InHomePage homePage, String username, String password,
